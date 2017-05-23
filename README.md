@@ -73,3 +73,11 @@ const Logger = ({ lastLocation }) => (
 
 export default withLastLocation(Logger);
 ```
+
+## <LastLocationProdiver />
+
+### Props
+
+**`watchOnlyPathname`**, type: `boolean`, default: `false`
+
+Stores only the last route when pathname is changed
