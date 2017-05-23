@@ -1,6 +1,7 @@
 # Project
 /dist
 /example/dist
+/coverage
 
 # Logs
 logs

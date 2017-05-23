@@ -15,8 +15,8 @@ export default WrappedComponent => {
     render() {
       return (
         <WrappedComponent
-            lastLocation={getLastLocation()}
-            {...this.props}
+          lastLocation={getLastLocation()}
+          {...this.props}
         />
       );
     }

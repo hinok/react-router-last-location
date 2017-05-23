@@ -8,6 +8,10 @@ class LastLocationProvider extends Component {
     watchOnlyPathname: false,
   };
 
+  constructor(...args) {
+    super(...args);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.location === nextProps.location) {
       return;
