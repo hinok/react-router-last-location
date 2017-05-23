@@ -4,12 +4,29 @@ import { withRouter } from 'react-router-dom';
 let lastLocation = null;
 
 class LastLocationProvider extends Component {
+  static defaultProps = {
+    watchOnlyPathname: false,
+  };
+
   componentWillReceiveProps(nextProps) {
-    if (this.props.location !== nextProps.location) {
+    if (this.props.location === nextProps.location) {
+      return;
+    }
+
+    if (!this.props.watchOnlyPathname) {
       lastLocation = {
         ...this.props.location,
       };
+      return;
     }
+
+    if (this.props.location.pathname === nextProps.location.pathname) {
+      return;
+    }
+
+    lastLocation = {
+      ...this.props.location,
+    };
   }
 
   render() {

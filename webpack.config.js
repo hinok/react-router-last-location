@@ -49,6 +49,7 @@ module.exports = (env) => {
     contentBase: outputPaths.example,
     compress: true,
     port: 8080,
+    historyApiFallback: { disableDotRule: true },
   };
 
   config.plugins.push(new HtmlWebpackPlugin({
