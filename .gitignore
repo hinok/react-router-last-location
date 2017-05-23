@@ -1,3 +1,7 @@
+# Project
+/dist
+/example/dist
+
 # Logs
 logs
 *.log
