@@ -4,6 +4,10 @@
 - Useful for handling internal routing.
 - Easily prevent leaving your app by users.
 
+## Demo
+
+[![Edit react-router-last-location](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/j2OpBnPZW)
+
 ## How to use?
 
 ```bash
