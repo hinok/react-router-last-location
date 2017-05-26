@@ -5,7 +5,7 @@ const Logger = ({ lastLocation }) => (
   <div>
     <h2>Logger!</h2>
     <pre>
-      {JSON.stringify(lastLocation)}
+      {JSON.stringify(lastLocation, undefined, 2)}
     </pre>
   </div>
 );
