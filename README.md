@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hinok/react-router-last-location.svg?branch=master)](https://travis-ci.org/hinok/react-router-last-location)
+
 # react-router-last-location
 
 - Provides access to the last location in react + react-router (v4.x) apps.
