@@ -25,7 +25,8 @@
     "prepublish": "npm run build",
     "test": "jest --config=jest.config.json",
     "test:watch": "jest --config=jest.config.json --watch",
-    "test:coverage": "jest --config=jest.config.json --coverage"
+    "test:coverage": "jest --config=jest.config.json --coverage",
+    "ci": "run-p build test:coverage"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
@@ -44,6 +45,7 @@
     "enzyme": "^2.8.2",
     "html-webpack-plugin": "^2.28.0",
     "jest": "^20.0.3",
+    "npm-run-all": "^4.0.2",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-addons-test-utils": "^15.5.1",
