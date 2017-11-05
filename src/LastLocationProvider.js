@@ -1,16 +1,25 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
 let lastLocation = null;
 
 class LastLocationProvider extends Component {
+  static propTypes = {
+    watchOnlyPathname: PropTypes.bool,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+      search: PropTypes.string,
+      hash: PropTypes.string,
+      key: PropTypes.string,
+      state: PropTypes.object,
+    }).isRequired,
+    children: PropTypes.node.isRequired,
+  };
+
   static defaultProps = {
     watchOnlyPathname: false,
   };
-
-  constructor(...args) {
-    super(...args);
-  }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.location === nextProps.location) {

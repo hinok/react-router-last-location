@@ -14,13 +14,13 @@
 ## How to use?
 
 ```bash
-# Please remember that you should have installed react and react-router-dom packages
-# npm install react react-router-dom --save
+# Please remember that you should have installed react, prop-types and react-router-dom packages
+# npm install react prop-types react-router-dom --save
 
 npm install react-router-last-location --save
 ```
 
-### Declare `<LastLocationProvider />` insde `<Router />`.
+### Declare `<LastLocationProvider />` inside `<Router />`.
 
 `index.js`
 

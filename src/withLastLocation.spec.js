@@ -19,11 +19,11 @@ jest.mock('./LastLocationProvider', () => ({
 const prepareTest = () => {
   const TestComponent = () => <div>Test</div>;
   const TestComponentWithLastLocation = withLastLocation(TestComponent);
-  const wrapper = mount(
+  const wrapper = mount((
     <MemoryRouter initialEntries={['/']}>
       <TestComponentWithLastLocation />
     </MemoryRouter>
-  );
+  ));
 
   return {
     TestComponent,

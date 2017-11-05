@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 class ManualHistory extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/forbid-prop-types
     history: PropTypes.object.isRequired,
   };
 

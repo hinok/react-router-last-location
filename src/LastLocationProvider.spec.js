@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
@@ -12,13 +13,13 @@ describe('LastLocationProvider', () => {
         getLastLocation,
       } = require('./LastLocationProvider');
 
-      const wrapper = mount(
+      const wrapper = mount((
         <MemoryRouter initialEntries={['/']}>
           <LastLocationProvider>
             <div>Test</div>
           </LastLocationProvider>
         </MemoryRouter>
-      );
+      ));
       const history = wrapper.find('LastLocationProvider').prop('history');
 
       expect(getLastLocation()).toBeNull();
@@ -40,13 +41,13 @@ describe('LastLocationProvider', () => {
         getLastLocation,
       } = require('./LastLocationProvider');
 
-      const wrapper = mount(
+      const wrapper = mount((
         <MemoryRouter initialEntries={['/']}>
           <LastLocationProvider watchOnlyPathname>
             <div>Test</div>
           </LastLocationProvider>
         </MemoryRouter>
-      );
+      ));
       const history = wrapper.find('LastLocationProvider').prop('history');
 
       expect(getLastLocation()).toBeNull();

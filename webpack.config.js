@@ -1,13 +1,13 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env) => {
   const isProd = env.prod === true;
   const isExample = env.example === true;
   const type = isExample ? 'example' : 'lib';
 
-  console.log(`Compiling: ${type} in mode: ${isProd ? 'production': 'dev'}`);
+  // eslint-disable-next-line no-console
+  console.log(`Compiling: ${type} in mode: ${isProd ? 'production' : 'dev'}`);
 
   const entries = {
     example: './example/src/index.js',
@@ -34,27 +34,33 @@ module.exports = (env) => {
         },
       ],
     },
-    devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
-    plugins: [],
   };
 
   if (!isExample) {
-    config.output.libraryTarget = 'commonjs2';
-    // @see https://github.com/webpack/webpack/issues/603#issuecomment-215547651
-    config.externals = /^[^.]/;
-    return config;
+    return {
+      ...config,
+      output: {
+        ...config.output,
+        libraryTarget: 'commonjs2',
+      },
+      // @see https://github.com/webpack/webpack/issues/603#issuecomment-215547651
+      externals: /^[^.]/,
+    };
   }
 
-  config.devServer = {
-    contentBase: outputPaths.example,
-    compress: true,
-    port: 8080,
-    historyApiFallback: { disableDotRule: true },
+  return {
+    ...config,
+    devtool: 'cheap-module-eval-source-map',
+    devServer: {
+      contentBase: outputPaths.example,
+      compress: true,
+      port: 8080,
+      historyApiFallback: { disableDotRule: true },
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: './example/src/index.ejs',
+      }),
+    ],
   };
-
-  config.plugins.push(new HtmlWebpackPlugin({
-    template: './example/src/index.ejs',
-  }));
-
-  return config;
 };
