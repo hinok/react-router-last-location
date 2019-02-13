@@ -39,9 +39,11 @@ module.exports = (env) => {
   if (!isExample) {
     return {
       ...config,
+      mode: 'production',
       output: {
         ...config.output,
-        libraryTarget: 'commonjs2',
+        library: 'ReactRouterLastLocation',
+        libraryTarget: 'umd',
       },
       // @see https://github.com/webpack/webpack/issues/603#issuecomment-215547651
       externals: /^[^.]/,
@@ -50,6 +52,7 @@ module.exports = (env) => {
 
   return {
     ...config,
+    mode: 'development',
     devtool: 'cheap-module-eval-source-map',
     devServer: {
       contentBase: outputPaths.example,

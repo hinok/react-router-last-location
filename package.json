@@ -53,15 +53,16 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
-    "html-webpack-plugin": "^2.28.0",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^22.0.4",
     "npm-run-all": "^4.1.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.1.1",
     "react-test-renderer": "16.2.0",
-    "serve": "^6.4.3",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
+    "serve": "^10.1.2",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
   }
 }
