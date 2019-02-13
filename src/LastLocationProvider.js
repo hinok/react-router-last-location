@@ -21,28 +21,31 @@ class LastLocationProvider extends Component {
     watchOnlyPathname: false,
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.location === nextProps.location) {
+  componentWillReceiveProps({ location: nextLocation }) {
+    const { location, watchOnlyPathname } = this.props;
+
+    if (location === nextLocation) {
       return;
     }
 
-    if (!this.props.watchOnlyPathname) {
+    if (!watchOnlyPathname) {
       lastLocation = {
-        ...this.props.location,
+        ...location,
       };
       return;
     }
 
-    if (this.props.location.pathname === nextProps.location.pathname) {
+    if (location.pathname === nextLocation.pathname) {
       return;
     }
 
     lastLocation = {
-      ...this.props.location,
+      ...location,
     };
   }
 
   render() {
+    // eslint-disable-next-line react/destructuring-assignment
     return this.props.children;
   }
 }
