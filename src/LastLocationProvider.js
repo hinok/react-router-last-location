@@ -4,8 +4,25 @@ import { withRouter } from 'react-router-dom';
 
 let lastLocation = null;
 
+const updateLastLocation = ({ location, nextLocation, watchOnlyPathname }) => {
+  if (location === null) {
+    return;
+  }
+
+  if (nextLocation === location) {
+    return;
+  }
+
+  if (watchOnlyPathname && location.pathname === nextLocation.pathname) {
+    return;
+  }
+
+  lastLocation = { ...location };
+};
+
 class LastLocationProvider extends Component {
   static propTypes = {
+    // eslint-disable-next-line react/no-unused-prop-types
     watchOnlyPathname: PropTypes.bool,
     location: PropTypes.shape({
       pathname: PropTypes.string,
@@ -21,28 +38,21 @@ class LastLocationProvider extends Component {
     watchOnlyPathname: false,
   };
 
-  componentWillReceiveProps({ location: nextLocation }) {
-    const { location, watchOnlyPathname } = this.props;
+  static getDerivedStateFromProps(props, state) {
+    updateLastLocation({
+      location: state.currentLocation,
+      nextLocation: props.location,
+      watchOnlyPathname: props.watchOnlyPathname,
+    });
 
-    if (location === nextLocation) {
-      return;
-    }
-
-    if (!watchOnlyPathname) {
-      lastLocation = {
-        ...location,
-      };
-      return;
-    }
-
-    if (location.pathname === nextLocation.pathname) {
-      return;
-    }
-
-    lastLocation = {
-      ...location,
+    return {
+      currentLocation: props.location,
     };
   }
+
+  state = {
+    currentLocation: null,
+  };
 
   render() {
     // eslint-disable-next-line react/destructuring-assignment
