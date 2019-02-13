@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { LastLocationProvider } from './../../src';
+import { LastLocationProvider } from '../../src';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';

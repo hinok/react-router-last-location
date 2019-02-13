@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withLastLocation } from './../../../../src';
+import { withLastLocation } from '../../../../src';
 
 const Logger = ({ lastLocation }) => (
   <div>

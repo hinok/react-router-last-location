@@ -4,8 +4,9 @@ import { withRouter } from 'react-router-dom';
 
 class ManualHistory extends Component {
   static propTypes = {
-    // eslint-disable-next-line react/forbid-prop-types
-    history: PropTypes.object.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   handleClick(pathname) {
@@ -17,20 +18,27 @@ class ManualHistory extends Component {
       },
     };
 
-    this.props.history.push(to);
+    const { history } = this.props;
+    history.push(to);
   }
 
   render() {
     return (
       <ul>
         <li>
-          <button onClick={() => this.handleClick('/')}>Home (with state)</button>
+          <button type="button" onClick={() => this.handleClick('/')}>
+            Home (with state)
+          </button>
         </li>
         <li>
-          <button onClick={() => this.handleClick('/about')}>About (with state)</button>
+          <button type="button" onClick={() => this.handleClick('/about')}>
+            About (with state)
+          </button>
         </li>
         <li>
-          <button onClick={() => this.handleClick('/contact')}>Contact (with state)</button>
+          <button type="button" onClick={() => this.handleClick('/contact')}>
+            Contact (with state)
+          </button>
         </li>
       </ul>
     );
