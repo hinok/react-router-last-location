@@ -18,5 +18,7 @@
   "transform": {
     ".*": "<rootDir>/node_modules/babel-jest"
   },
-  "setupTestFrameworkScriptFile": "<rootDir>/tests/setup.js"
+  "setupFilesAfterEnv": [
+    "<rootDir>/tests/setup.js"
+  ]
 }
