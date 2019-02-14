@@ -1,5 +1,8 @@
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env) => {
   const isProd = env.prod === true;
@@ -25,45 +28,91 @@ module.exports = (env) => {
       path: outputPaths[type],
       filename: 'index.js',
     },
-    module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/,
-          use: 'babel-loader',
-          exclude: /node_modules/,
-        },
-      ],
-    },
   };
 
-  if (!isExample) {
-    return {
-      ...config,
-      mode: 'production',
-      output: {
-        ...config.output,
-        library: 'ReactRouterLastLocation',
-        libraryTarget: 'umd',
+  if (isProd) {
+    return webpackMerge(
+      config,
+      {
+        module: {
+          rules: [
+            {
+              test: /\.(js|jsx)$/,
+              use: 'babel-loader',
+              exclude: /node_modules/,
+            },
+          ],
+        },
+        mode: 'production',
+        output: {
+          library: 'ReactRouterLastLocation',
+          libraryTarget: 'umd',
+        },
+        // @see https://github.com/webpack/webpack/issues/603#issuecomment-215547651
+        externals: /^[^.]/,
+        plugins: [
+          new webpack.DefinePlugin({
+            'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) },
+          }),
+        ],
       },
-      // @see https://github.com/webpack/webpack/issues/603#issuecomment-215547651
-      externals: /^[^.]/,
-    };
+    );
   }
 
-  return {
-    ...config,
-    mode: 'development',
-    devtool: 'cheap-module-eval-source-map',
-    devServer: {
-      contentBase: outputPaths.example,
-      compress: true,
-      port: 8080,
-      historyApiFallback: { disableDotRule: true },
+  return webpackMerge(
+    config,
+    {
+      module: {
+        rules: [
+          {
+            test: /\.js|jsx$/,
+            exclude: /node_modules/,
+            use: [
+              {
+                loader: 'babel-loader',
+              },
+              {
+                loader: 'linaria/loader',
+                options: {
+                  sourceMap: true,
+                },
+              },
+            ],
+          },
+          {
+            test: /\.css$/,
+            use: [
+              'css-hot-loader',
+              MiniCssExtractPlugin.loader,
+              {
+                loader: 'css-loader',
+                options: {
+                  modules: 'global',
+                  sourceMap: true,
+                },
+              },
+            ],
+          },
+        ],
+      },
+      mode: 'development',
+      devtool: 'cheap-module-eval-source-map',
+      devServer: {
+        contentBase: outputPaths.example,
+        compress: true,
+        hot: true,
+        port: 8080,
+        historyApiFallback: { disableDotRule: true },
+      },
+      plugins: [
+        new HtmlWebpackPlugin({
+          template: './example/src/index.ejs',
+        }),
+        new MiniCssExtractPlugin({
+          filename: 'styles.css',
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+      ],
     },
-    plugins: [
-      new HtmlWebpackPlugin({
-        template: './example/src/index.ejs',
-      }),
-    ],
-  };
+  );
 };

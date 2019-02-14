@@ -2,6 +2,7 @@
 /dist
 /example/dist
 /coverage
+/.linaria-cache
 
 # Logs
 logs

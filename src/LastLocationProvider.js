@@ -1,6 +1,7 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import LastLocationContext from './LastLocationContext';
 
 let lastLocation = null;
 
@@ -55,8 +56,13 @@ class LastLocationProvider extends Component {
   };
 
   render() {
-    // eslint-disable-next-line react/destructuring-assignment
-    return this.props.children;
+    const { children } = this.props;
+
+    return (
+      <LastLocationContext.Provider value={lastLocation}>
+        {children}
+      </LastLocationContext.Provider>
+    );
   }
 }
 
