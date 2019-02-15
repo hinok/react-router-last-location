@@ -22,6 +22,12 @@
 npm install react-router-last-location --save
 ```
 
+**If you'd like to use hook `useLastLocation`, please install `2.0.0-beta.0`**
+
+```bash
+npm install react-router-last-location@2.0.0-beta.0
+```
+
 ### Declare `<LastLocationProvider />` inside `<Router />`.
 
 `index.js`
