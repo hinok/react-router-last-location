@@ -67,4 +67,9 @@ class LastLocationProvider extends Component {
 }
 
 export const getLastLocation = () => lastLocation;
+
+export const setLastLocation = (nextLastLocation) => {
+  lastLocation = nextLastLocation;
+};
+
 export default withRouter(LastLocationProvider);
