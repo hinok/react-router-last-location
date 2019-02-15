@@ -6,6 +6,10 @@
   "repository": "git@github.com:hinok/react-router-last-location.git",
   "author": "Dawid Karabin <mail@hinok.net>",
   "license": "MIT",
+  "files": [
+    "/dist",
+    "/src"
+  ],
   "keywords": [
     "react",
     "router",

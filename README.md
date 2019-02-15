@@ -11,7 +11,7 @@
 
 ## Demo
 
-[![Edit react-router-last-location](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/j2OpBnPZW)
+[![Edit react-router-last-location](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/wn9kr41z5l)
 
 ## How to use?
 
