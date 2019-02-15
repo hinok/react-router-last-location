@@ -1,6 +1,6 @@
 {
   "name": "react-router-last-location",
-  "version": "1.1.0",
+  "version": "2.0.0-beta.0",
   "description": "Provides access to the last location in react + react-router (v4.x) apps. Useful for handling internal routing. Easily prevent leaving your app by users.",
   "main": "dist/index.js",
   "repository": "git@github.com:hinok/react-router-last-location.git",
