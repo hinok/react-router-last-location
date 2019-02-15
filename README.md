@@ -3,7 +3,9 @@
 
 # react-router-last-location
 
-- Provides access to the last location in react + react-router (v4.x) apps.
+- Provides access to the last location in `react` + `react-router (v4.x)` applications.
+- ❤️ Using [`hooks`](https://reactjs.org/docs/hooks-overview.html)? If yes, `useLastLocation`.
+- 💉 Using [`HOC`](https://reactjs.org/docs/higher-order-components.html)? - If yes, `withLastLocation`.
 - Useful for handling internal routing.
 - Easily prevent leaving your app by users.
 
@@ -61,9 +63,34 @@ const App = () => (
 render(<App />, document.getElementById('root'));
 ```
 
+### Use hook `useLastLocation` to get `lastLocation`.
+
+`./components/Logger`, [see example](https://github.com/hinok/react-router-last-location/blob/eb552e0a82df6000ba140d8f20627b8bc68716b6/example/src/components/LoggerHooks/index.js)
+
+```jsx
+import React from 'react';
+import { useLastLocation } from 'react-router-last-location';
+
+const Logger = () => {
+  const lastLocation = useLastLocation();
+
+  return (
+    <div>
+      <h2>Logger!</h2>
+      <pre>
+        {JSON.stringify(lastLocation)}
+      </pre>
+    </div>
+  );
+};
+
+export default LoggerHooks;
+
+```
+
 ### Use HOC `withLastLocation` to get `lastLocation` prop.
 
-`<Logger />`
+`./components/Logger`, [see example](https://github.com/hinok/react-router-last-location/blob/eb552e0a82df6000ba140d8f20627b8bc68716b6/example/src/components/LoggerHOC/index.js)
 
 ```jsx
 import React from 'react';
@@ -87,4 +114,4 @@ export default withLastLocation(Logger);
 
 **`watchOnlyPathname`**, type: `boolean`, default: `false`
 
-Stores only the last route when pathname is changed
+Stores the last route only when pathname has changed
