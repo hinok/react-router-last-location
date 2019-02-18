@@ -1,5 +1,5 @@
-import React from 'react';
-import { render } from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { LastLocationProvider } from '../../src';
 import Home from './pages/Home';
@@ -34,4 +34,4 @@ const App = () => (
   </BrowserRouter>
 );
 
-render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

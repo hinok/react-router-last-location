@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { css } from 'linaria';
 
@@ -30,7 +30,12 @@ const logger = css`
   }
 `;
 
-const Logger = ({ title, data }) => (
+type Props = {
+  title: React.ReactNode;
+  data: object | null;
+}
+
+const Logger: React.FC<Props> = ({ title, data }) => (
   <div className={logger}>
     <h2>Logger</h2>
     <h3>{title}</h3>
