@@ -1,6 +1,8 @@
 {
   "collectCoverageFrom": [
-    "src/**/*.js"
+    "src/**/*.js",
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ],
   "coveragePathIgnorePatterns": [
     "/node_modules/",
@@ -16,7 +18,8 @@
     }
   },
   "transform": {
-    ".*": "<rootDir>/node_modules/babel-jest"
+    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
   },
   "setupFilesAfterEnv": [
     "<rootDir>/tests/setup.js"

@@ -1,9 +1,9 @@
-/* eslint-disable global-require */
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
+import { History } from 'history';
 import { MemoryRouter } from 'react-router-dom';
 
-const prepareTest = ({ watchOnlyPathname } = {}) => {
+const prepareTest = ({ watchOnlyPathname }:{ watchOnlyPathname?: boolean } = {}) => {
   jest.resetModules();
 
   const { default: LastLocationProvider, getLastLocation } = require('./LastLocationProvider');
@@ -18,7 +18,7 @@ const prepareTest = ({ watchOnlyPathname } = {}) => {
     )),
   );
 
-  const history = wrapper.find('LastLocationProvider').prop('history');
+  const history: History = wrapper.find('LastLocationProvider').prop('history');
 
   return {
     wrapper,

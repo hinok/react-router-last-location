@@ -1,15 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import * as React from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-class ManualHistory extends Component {
-  static propTypes = {
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-  };
-
-  handleClick(pathname) {
+class ManualHistory extends React.Component<RouteComponentProps> {
+  handleClick(pathname: string) {
     const to = {
       pathname,
       state: {

@@ -1,5 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
+import { History } from 'history';
 import { MemoryRouter } from 'react-router-dom';
 import withLastLocation from './withLastLocation';
 import { getLastLocation } from './LastLocationProvider';
@@ -15,6 +16,8 @@ const mockLocation = {
 jest.mock('./LastLocationProvider', () => ({
   getLastLocation: jest.fn(() => mockLocation),
 }));
+
+const mockedGetLastLocation = getLastLocation as jest.Mock<ReturnType<typeof getLastLocation>>;
 
 const prepareTest = () => {
   const TestComponent = () => <div>Test</div>;
@@ -55,10 +58,10 @@ describe('withLastLocation', () => {
 
     it('should call getLastLocation when route is changed', () => {
       const { TestComponent, wrapper } = prepareTest();
-      expect(getLastLocation.mock.calls.length).toBe(1);
-      const history = wrapper.find(TestComponent).prop('history');
+      expect(mockedGetLastLocation.mock.calls.length).toBe(1);
+      const history: History = wrapper.find(TestComponent).prop('history');
       history.push('/saturday-night');
-      expect(getLastLocation.mock.calls.length).toBe(2);
+      expect(mockedGetLastLocation.mock.calls.length).toBe(2);
     });
 
     it('should set displayName for the parent component', () => {
