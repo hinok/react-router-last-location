@@ -6,7 +6,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const tsLoader = nextLoader => ({
   test: /\.(ts|tsx|js|)$/,
-  use: [{ loader: 'ts-loader' }, nextLoader].filter(Boolean),
+  use: [
+    {
+      loader: 'ts-loader',
+      options: {
+        onlyCompileBundledFiles: true,
+      },
+    },
+    nextLoader,
+  ].filter(Boolean),
   exclude: [/node_modules/, /\.ejs$/],
 });
 
