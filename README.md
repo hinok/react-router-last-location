@@ -6,10 +6,19 @@
 - Provides access to the last location in `react` + `react-router (v4.x)` applications.
 - ❤️ Using [`hooks`](https://reactjs.org/docs/hooks-overview.html)? If yes, `useLastLocation`.
 - 💉 Using [`HOC`](https://reactjs.org/docs/higher-order-components.html)? - If yes, `withLastLocation`.
+- Support ![TypeScript](https://user-images.githubusercontent.com/1313605/53197634-df9a6d00-361a-11e9-81ba-69f8a941f8a2.png)
 - Useful for handling internal routing.
 - Easily prevent leaving your app by users.
 
 ## Demo
+
+### TypeScript (`v2.0.0-beta.1` - `now`)
+
+Are you using `TypeScript` and would like to have proper autocompletion and type checking? Install at least `v2.0.0-beta.1`.
+
+[![Edit react-router-last-location](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/zn208l91zp)
+
+### JavaScript (`v1.0.0 - v2.0.0-beta.0`)
 
 [![Edit react-router-last-location](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/wn9kr41z5l)
 
@@ -22,10 +31,12 @@
 npm install react-router-last-location --save
 ```
 
-**If you'd like to use hook `useLastLocation`, please install `2.0.0-beta.0`**
+**If you'd like to use hook `useLastLocation`, please install at least `2.0.0-beta.0`**
 
 ```bash
 npm install react-router-last-location@2.0.0-beta.0
+# or
+npm install react-router-last-location@latest
 ```
 
 ### Declare `<LastLocationProvider />` inside `<Router />`.
@@ -120,4 +131,4 @@ export default withLastLocation(Logger);
 
 **`watchOnlyPathname`**, type: `boolean`, default: `false`
 
-Stores the last route only when pathname has changed
+Stores the last route only when `pathname` has changed.
