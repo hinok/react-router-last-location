@@ -1,11 +1,10 @@
-/* eslint-disable global-require */
-import React from 'react';
-import { mount } from 'enzyme';
+import * as React from 'react';
+import { mount, ReactWrapper } from 'enzyme';
 import { MemoryRouter, Route, Link } from 'react-router-dom';
 import useLastLocation from './useLastLocation';
 import LastLocationProvider, { setLastLocation } from './LastLocationProvider';
 
-const Logger = () => {
+const Logger: React.FC = () => {
   const lastLocation = useLastLocation();
 
   return (
@@ -19,7 +18,7 @@ const Logger = () => {
   );
 };
 
-const Navigation = () => (
+const Navigation: React.FC = () => (
   <ul>
     <li>
       <Link to="/">Home</Link>
@@ -33,17 +32,16 @@ const Navigation = () => (
   </ul>
 );
 
-// eslint-disable-next-line react/prop-types
-const Page = ({ children }) => (
+const Page: React.FC = ({ children }) => (
   <div>
     <h1>{children}</h1>
     <Logger />
   </div>
 );
 
-const Home = () => <Page>Home</Page>;
-const About = () => <Page>About</Page>;
-const Contact = () => <Page>Contact</Page>;
+const Home: React.FC = () => <Page>Home</Page>;
+const About: React.FC = () => <Page>About</Page>;
+const Contact: React.FC = () => <Page>Contact</Page>;
 
 const suite = () => {
   // We need to reset lastLocation for each run in tests
@@ -62,7 +60,7 @@ const suite = () => {
     </MemoryRouter>,
   );
 
-  const getLink = text => appWrapper
+  const getLink = (text: string) => appWrapper
     .find(Link)
     .find({ to: text })
     .children();
@@ -89,7 +87,7 @@ const suite = () => {
     get pageTitle() {
       return appWrapper.find('h1').text();
     },
-    click(wrapper) {
+    click(wrapper: ReactWrapper) {
       // We need to pass mock event { button: 0 }
       // @see https://github.com/airbnb/enzyme/issues/516#issue-167924470
       wrapper.simulate('click', { button: 0 });

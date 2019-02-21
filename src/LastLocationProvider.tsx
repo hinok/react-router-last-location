@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import { Assign } from 'utility-types';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import LastLocationContext, { LastLocationType } from './LastLocationContext';
 
@@ -30,11 +31,7 @@ const updateLastLocation = ({ location, nextLocation, watchOnlyPathname }: Updat
 interface Props extends RouteComponentProps {
   watchOnlyPathname: boolean;
   children: React.ReactNode;
-};
-
-type DefaultProps = {
-  watchOnlyPathname: boolean;
-};
+}
 
 type State = Readonly<{
   currentLocation: LastLocationType;
@@ -46,7 +43,7 @@ class LastLocationProvider extends React.Component<Props, State> {
     children: PropTypes.node.isRequired,
   };
 
-  static defaultProps: DefaultProps = {
+  static defaultProps: Pick<Props, 'watchOnlyPathname'> = {
     watchOnlyPathname: false,
   };
 
@@ -82,7 +79,16 @@ export const setLastLocation = (nextLastLocation: LastLocationType) => {
 };
 
 /**
+ * Unfortunately defaultProps doesn't work in this case
+ * @see https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript#support-for-defaultprops-in-jsx
+ *
+ * Related issues:
  * @see https://github.com/Microsoft/TypeScript/issues/23812#issuecomment-426771485
  * @see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/28515
  */
-export default withRouter(LastLocationProvider as React.ComponentType<Props>);
+type ExportedProps = Assign<
+  Pick<Props, Exclude<keyof Props, 'watchOnlyPathname'>>,
+  { watchOnlyPathname?: boolean }
+>;
+
+export default withRouter(LastLocationProvider as React.ComponentClass<ExportedProps>);
