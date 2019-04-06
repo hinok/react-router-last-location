@@ -25,6 +25,10 @@ const updateLastLocation = ({ location, nextLocation, watchOnlyPathname }: Updat
     return;
   }
 
+  if (nextLocation.state && nextLocation.state.preventLastLocation) {
+    return;
+  }
+
   lastLocation = { ...location };
 };
 
