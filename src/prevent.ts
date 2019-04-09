@@ -21,5 +21,5 @@ export const prevent = (location: RRLocation) => {
 export const hasBeenPrevented = (location: RRLocation) =>
   prevented.some(preventedLocation => isEqual(location, preventedLocation));
 
-export const shouldPrevent = (location: RRLocation) =>
-  location.state && location.state.preventLastLocation;
+export const shouldPrevent = (location: RRLocation): boolean =>
+  Boolean(location.state && location.state.preventLastLocation);

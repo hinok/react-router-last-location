@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Redirect } from 'react-router-dom';
+import RedirectWithoutLastLocation from '../../../src/RedirectWithoutLastLocation';
 
 const FixedRedirect: React.FC = () => (
-  <Redirect to={{ pathname: '/', state: { preventLastLocation: true } }} />
+  <RedirectWithoutLastLocation to="/" />
 );
 
 export default FixedRedirect;
