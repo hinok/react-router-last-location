@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import LastLocationContext, { LastLocationType } from './LastLocationContext';
 import { Assign } from './types';
+import { hasBeenPrevented, prevent, shouldPrevent } from './prevent';
 
 let lastLocation: LastLocationType = null;
 
@@ -25,7 +26,8 @@ const updateLastLocation = ({ location, nextLocation, watchOnlyPathname }: Updat
     return;
   }
 
-  if (nextLocation.state && nextLocation.state.preventLastLocation) {
+  if (shouldPrevent(nextLocation) && !hasBeenPrevented(nextLocation)) {
+    prevent(nextLocation);
     return;
   }
 
