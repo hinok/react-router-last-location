@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { Assign } from 'utility-types';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import LastLocationContext, { LastLocationType } from './LastLocationContext';
+import { Assign } from './types';
 
 let lastLocation: LastLocationType = null;
 
