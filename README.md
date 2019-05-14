@@ -12,9 +12,9 @@
 
 ## Demo
 
-### TypeScript (`v2.0.0-beta.1` - `now`)
+### TypeScript (`v2.0.0-beta.2` - `now`)
 
-Are you using `TypeScript` and would like to have proper autocompletion and type checking? Install at least `v2.0.0-beta.1`.
+Are you using `TypeScript` and would like to have proper autocompletion and type checking? Install at least `v2.0.0-beta.2`.
 
 [![Edit react-router-last-location](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/zn208l91zp)
 
