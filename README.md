@@ -12,15 +12,7 @@
 
 ## Demo
 
-### TypeScript (`v2.0.0-beta.2` - `now`)
-
-Are you using `TypeScript` and would like to have proper autocompletion and type checking? Install at least `v2.0.0-beta.2`.
-
 [![Edit react-router-last-location](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/zn208l91zp)
-
-### JavaScript (`v1.0.0 - v2.0.0-beta.0`)
-
-[![Edit react-router-last-location](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/wn9kr41z5l)
 
 ## How to use?
 
@@ -31,10 +23,10 @@ Are you using `TypeScript` and would like to have proper autocompletion and type
 npm install react-router-last-location --save
 ```
 
-**If you'd like to use hook `useLastLocation`, please install at least `2.0.0-beta.0`**
+**If you still use `v1.x.x` and would like to use hook `useLastLocation`, please upgrade to `v2.x.x` version (don't worry, no breaking changes)**
 
 ```bash
-npm install react-router-last-location@2.0.0-beta.0
+npm install react-router-last-location@2.0.0-beta.3
 # or
 npm install react-router-last-location@latest
 ```
