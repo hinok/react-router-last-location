@@ -59,6 +59,14 @@ module.exports = (env) => {
       output: {
         library: 'ReactRouterLastLocation',
         libraryTarget: 'umd',
+        /**
+         * When targeting a library, especially the libraryTarget is 'umd',
+         * this option indicates what global object will be used to mount the library.
+         * To make UMD build available on both browsers and Node.js,
+         * set output.globalObject option to 'this'.
+         * @see https://webpack.js.org/configuration/output/#outputglobalobject
+         */
+        globalObject: 'this',
       },
       // @see https://github.com/webpack/webpack/issues/603#issuecomment-215547651
       externals: /^[^.]/,
