@@ -14,6 +14,34 @@
 
 [![Edit react-router-last-location](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/zn208l91zp)
 
+## Note: Last location != Previous browser history state
+
+This library only returns the location that has been active before the recent location change in the current window lifetime.
+
+This means, it is not equal to the "location that happened before navigating to this history state", or in other words "location to which you'll be redirected upon clicking browser back button".
+
+Example 1:
+
+1. Visit `/`: last location = `null`, previous browser history state = `null`
+2. Visit `/a`: last location = `/`, previous browser history state = `/`
+3. Visit `/b`: last location = `/a`, previous browser history state = `/a`
+4. Reload (url will stay at `/b`): last location = `null`, previous browser history state = `/a`
+
+Example 2:
+
+1. Visit `/`: last location = `null`
+2. Visit `/a`: last location = `/`
+3. Visit `/b`: last location = `/a`
+4. Go back: last location = `/b`, previous browser history state = `/`
+
+Example 3:
+
+1. Visit `/`: last location = `null`
+2. Visit `/a`: last location = `/`
+3. Visit `/b`: last location = `/a`
+4. Visit `/c`: last location = `/b`
+4. Go back to `/a` (by selecting that state explicitly in "Go back" browser dropdown that is visible upon clicking it with right mouse button): last location = `/c`, previous browser history state = `/`
+
 ## How to use?
 
 ```bash
