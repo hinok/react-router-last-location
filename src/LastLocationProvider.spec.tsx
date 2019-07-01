@@ -1,22 +1,24 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { History } from 'history';
-import { MemoryRouter } from 'react-router-dom';
 
 const prepareTest = ({ watchOnlyPathname }:{ watchOnlyPathname?: boolean } = {}) => {
   jest.resetModules();
 
+  // We need fresh instance of MemoryRouter after resetModules()
+  // @see https://stackoverflow.com/questions/56664997/jest-resetmodules-is-breaking-react-router-dom-context
+  const { MemoryRouter } = require('react-router-dom');
   const { default: LastLocationProvider, getLastLocation } = require('./LastLocationProvider');
 
-  const wrapper = mount(
-    React.createElement(props => (
-      <MemoryRouter initialEntries={['/']}>
-        <LastLocationProvider watchOnlyPathname={watchOnlyPathname} {...props}>
-          <div>Test</div>
-        </LastLocationProvider>
-      </MemoryRouter>
-    )),
+  const App: React.FC = props => (
+    <MemoryRouter initialEntries={['/']}>
+      <LastLocationProvider watchOnlyPathname={watchOnlyPathname} {...props}>
+        <div>Test</div>
+      </LastLocationProvider>
+    </MemoryRouter>
   );
+
+  const wrapper = mount(<App />);
 
   const history: History = wrapper.find('LastLocationProvider').prop('history');
 

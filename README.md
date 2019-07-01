@@ -3,7 +3,7 @@
 
 # react-router-last-location
 
-- Provides access to the last location in `react` + `react-router (v4.x)` applications.
+- Provides access to the last location in `react` + `react-router (v4.x, v5.x)` applications.
 - ❤️ Using [`hooks`](https://reactjs.org/docs/hooks-overview.html)? If yes, `useLastLocation`.
 - 💉 Using [`HOC`](https://reactjs.org/docs/higher-order-components.html)? - If yes, `withLastLocation`.
 - Support ![TypeScript](https://user-images.githubusercontent.com/1313605/53197634-df9a6d00-361a-11e9-81ba-69f8a941f8a2.png)
@@ -20,21 +20,21 @@ This library only returns the location that has been active before the recent lo
 
 This means, it is not equal to the "location that happened before navigating to this history state", or in other words "location to which you'll be redirected upon clicking browser back button".
 
-Example 1:
+**Example 1**
 
 1. Visit `/`: last location = `null`, previous browser history state = `null`
 2. Visit `/a`: last location = `/`, previous browser history state = `/`
 3. Visit `/b`: last location = `/a`, previous browser history state = `/a`
 4. Reload (url will stay at `/b`): last location = `null`, previous browser history state = `/a`
 
-Example 2:
+**Example 2**
 
 1. Visit `/`: last location = `null`
 2. Visit `/a`: last location = `/`
 3. Visit `/b`: last location = `/a`
 4. Go back: last location = `/b`, previous browser history state = `/`
 
-Example 3:
+**Example 3**
 
 1. Visit `/`: last location = `null`
 2. Visit `/a`: last location = `/`
