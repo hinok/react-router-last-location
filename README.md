@@ -6,6 +6,7 @@
 - Provides access to the last location in `react` + `react-router (v4.x, v5.x)` applications.
 - ❤️ Using [`hooks`](https://reactjs.org/docs/hooks-overview.html)? If yes, `useLastLocation`.
 - 💉 Using [`HOC`](https://reactjs.org/docs/higher-order-components.html)? - If yes, `withLastLocation`.
+- Handle redirects.
 - Support ![TypeScript](https://user-images.githubusercontent.com/1313605/53197634-df9a6d00-361a-11e9-81ba-69f8a941f8a2.png)
 - Useful for handling internal routing.
 - Easily prevent leaving your app by users.
@@ -51,10 +52,10 @@ This means, it is not equal to the "location that happened before navigating to 
 npm install react-router-last-location --save
 ```
 
-**If you still use `v1.x.x` and would like to use hook `useLastLocation`, please upgrade to `v2.x.x` version (don't worry, no breaking changes)**
+**If you still use `v1.x.x` and would like to use hook `useLastLocation`, please upgrade to `v2.x.x` version (don't worry, no breaking changes).**
 
 ```bash
-npm install react-router-last-location@2.0.0-beta.3
+npm install react-router-last-location@^2.0.0
 # or
 npm install react-router-last-location@latest
 ```
@@ -145,7 +146,38 @@ const Logger = ({ lastLocation }) => (
 export default withLastLocation(Logger);
 ```
 
-## <LastLocationProdiver />
+### Use `RedirectWithoutLastLocation` to don't store redirects as last location
+
+```jsx
+import React from 'react';
+import { RedirectWithoutLastLocation } from 'react-router-last-location';
+
+const MyPage = () => (
+  <RedirectWithoutLastLocation to="/" />
+);
+
+export default MyPage;
+```
+
+You can still use regular `<Redirect />` component from `react-router` but then you need to pass manually the `state: { preventLastLocation: true }`, like below:
+
+```jsx
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+
+const MyPage = () => (
+  <Redirect
+    to={{
+      pathname: '/',
+      state: { preventLastLocation: true },
+    }}
+  />
+);
+
+export default MyPage;
+```
+
+## LastLocationProvider
 
 ### Props
 

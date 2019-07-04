@@ -1,12 +1,22 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { css } from 'linaria';
 
+const fonts = {
+  sans: '\'Roboto\', sans-serif',
+  mono: '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace',
+};
+
+export const typeMono = css`
+  font-family: ${fonts.mono};
+`;
+
 export const globals = css`
   :global {
     html {
       box-sizing: border-box;
       height: 100%;
       width: 100%;
+      font-size: 100%;
     }
 
     body {
@@ -14,8 +24,7 @@ export const globals = css`
       padding: 0;
       height: 100%;
       width: 100%;
-      font-family: 'Roboto', sans-serif;
-      font-size: 16px;
+      font-family: ${fonts.sans};
       line-height: 1.5;
     }
 
@@ -32,10 +41,10 @@ export const globals = css`
     }
 
     pre {
+      font-family: ${fonts.mono};
       margin: 0;
       padding: 0;
-      font-family: 'Inconsolata', serif;
-      font-size: 16px;
+      font-size: 0.75rem;
     }
   }
 `;
@@ -75,4 +84,17 @@ export const header = css`
       background: royalblue;
     }
   }
+
+  .${typeMono} {
+    font-size: 0.875em;
+  }
+`;
+
+export const badge = css`
+  font-family: ${fonts.mono};
+  font-size: 0.75em;
+  line-height: 1;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 3px 5px;
 `;

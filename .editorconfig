@@ -12,7 +12,7 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 max_line_length = 100
 
-[*.{html,hbs,mustache,ejs,js,jsx,rb,scss,xml,svg,json}]
+[*.{html,hbs,mustache,ejs,js,jsx,ts,tsx,rb,scss,xml,svg,json}]
 indent_size = 2
 
 [*.md]

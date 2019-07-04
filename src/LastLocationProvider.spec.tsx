@@ -75,4 +75,22 @@ describe('LastLocationProvider', () => {
 
     expect(lastLocationPrev).toBe(lastLocationNext);
   });
+
+  it('should NOT store redirected locations', () => {
+    const { getLastLocation, history } = prepareTest();
+
+    expect(getLastLocation()).toBeNull();
+
+    history.push('/test-1');
+    expect(getLastLocation()).toMatchObject({ pathname: '/' });
+
+    history.replace('/test-2', { preventLastLocation: true });
+    expect(getLastLocation()).toMatchObject({ pathname: '/' });
+
+    history.replace('/test-3', { preventLastLocation: true });
+    expect(getLastLocation()).toMatchObject({ pathname: '/' });
+
+    history.replace('/test-4');
+    expect(getLastLocation()).toMatchObject({ pathname: '/test-3' });
+  });
 });
