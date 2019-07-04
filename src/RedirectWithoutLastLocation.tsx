@@ -3,7 +3,20 @@ import { Redirect, RedirectProps } from 'react-router-dom';
 import { createLocation } from 'history';
 
 const RedirectWithoutLastLocation: React.FC<RedirectProps> = ({ to, ...rest }) => {
-  let finalTo = typeof to === 'string' ? createLocation(to, { preventLastLocation: true }) : to;
+  let finalTo;
+
+  if (typeof to === 'string') {
+    finalTo = createLocation(to, { preventLastLocation: true });
+  } else {
+    finalTo = {
+      ...to,
+      state: {
+        preventLastLocation: true,
+        ...to.state,
+      },
+    };
+  }
+
   return <Redirect {...rest} to={finalTo} />;
 };
 
