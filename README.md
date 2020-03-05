@@ -9,7 +9,7 @@
 - Handle redirects.
 - Support ![TypeScript](https://user-images.githubusercontent.com/1313605/53197634-df9a6d00-361a-11e9-81ba-69f8a941f8a2.png)
 - Useful for handling internal routing.
-- Easily prevent leaving your app by users.
+- Easily keep your users inside your app.
 
 ## Demo
 
@@ -17,9 +17,11 @@
 
 ## Note: Last location != Previous browser history state
 
-This library only returns the location that has been active before the recent location change in the current window lifetime.
+This library only returns the location that was active right before the recent location change, during the lifetime of the current window.
 
-This means, it is not equal to the "location that happened before navigating to this history state", or in other words "location to which you'll be redirected upon clicking browser back button".
+This means, it is not equal to the "location you were at before navigating to this history state".
+
+In other words, the location this library provides is not necessarily the same as the one when you click the browser's back button.
 
 **Example 1**
 
@@ -146,7 +148,7 @@ const Logger = ({ lastLocation }) => (
 export default withLastLocation(Logger);
 ```
 
-### Use `RedirectWithoutLastLocation` to don't store redirects as last location
+### Use `RedirectWithoutLastLocation` to not store redirects as last location
 
 ```jsx
 import React from 'react';
@@ -159,7 +161,9 @@ const MyPage = () => (
 export default MyPage;
 ```
 
-You can still use regular `<Redirect />` component from `react-router` but then you need to pass manually the `state: { preventLastLocation: true }`, like below:
+You can still use a regular `<Redirect />` component from `react-router`.
+
+If you do, you'll  then you need to manually pass the `state: { preventLastLocation: true }`, like below:
 
 ```jsx
 import React from 'react';
