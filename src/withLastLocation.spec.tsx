@@ -4,6 +4,7 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import withLastLocation from './withLastLocation';
 import { getLastLocation } from './LastLocationProvider';
+import { WithLastLocationProps } from '.';
 
 const mockLocation = {
   pathname: '/testing-at-night',
@@ -51,9 +52,22 @@ describe('withLastLocation', () => {
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
+    it('should pass lastLocation as prop to the wrapped component', () => {
+      const TestComponent = ({lastLocation}: WithLastLocationProps) => <div>{lastLocation ? lastLocation.pathname : ""}</div>;
+      const TestComponentWithLastLocation = withLastLocation(TestComponent);
+
+      const history = createMemoryHistory({initialEntries: ["/"]})
+      render(
+        <Router history={history}>
+          <TestComponentWithLastLocation />
+        </Router>
+      );
+
+      expect(screen.getByText(mockLocation.pathname)).toBeInTheDocument();
+    })
 
     it('should call getLastLocation when route is changed', () => {
-      const { TestComponent, history } = prepareTest();
+      const {  history } = prepareTest();
       expect(mockedGetLastLocation.mock.calls.length).toBe(1);
       history.push('/saturday-night');
       expect(mockedGetLastLocation.mock.calls.length).toBe(2);
