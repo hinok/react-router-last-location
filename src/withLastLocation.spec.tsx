@@ -78,5 +78,10 @@ describe('withLastLocation', () => {
       const TestComponentWithLastLocation = withLastLocation(TestComponent);
       expect(TestComponentWithLastLocation.displayName).toBe('withRouter(WithLastLocation(TestComponent))');
     });
+
+    it('should set wrapped component name to Component on anonymous components', () => {
+      const TestComponentWithLastLocation = withLastLocation(() => <div>Test</div>);
+      expect(TestComponentWithLastLocation.displayName).toBe('withRouter(WithLastLocation(Component))');
+    });
   });
 });
