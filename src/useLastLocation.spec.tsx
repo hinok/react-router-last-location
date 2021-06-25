@@ -6,7 +6,7 @@ import { createMemoryHistory } from 'history';
 import useLastLocation from './useLastLocation';
 import LastLocationProvider from './LastLocationProvider';
 
-function renderHook(watchOnlyPathname?: boolean) {
+function renderHook(watchOnlyPathname = false) {
   const history = createMemoryHistory({
     initialEntries: ['/'],
     initialIndex: 0,
