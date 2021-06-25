@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   MemoryRouter, Switch, Route, Link, RedirectProps,
 } from 'react-router-dom';
-import { mount, ReactWrapper } from 'enzyme';
 import { LastLocationType } from './LastLocationContext';
 import useLastLocation from './useLastLocation';
 import RedirectWithoutLastLocation from './RedirectWithoutLastLocation';
