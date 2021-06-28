@@ -42,7 +42,7 @@ function rtlRender({ redirectTo }: { redirectTo: RedirectProps['to'] }) {
       )
 
 }
-
+afterEach(() => setLastLocation(null))
 describe('RedirectWithoutLastLocation', () => {
   const runTest = () => {
     // Check if lastLocation is empty
