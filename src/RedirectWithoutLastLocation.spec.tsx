@@ -46,14 +46,14 @@ afterEach(() => setLastLocation(null))
 describe('RedirectWithoutLastLocation', () => {
   const runTest = () => {
     // Check if lastLocation is empty
-    screen.getAllByTestId(/last-location-pathname/i)
+    screen.getByTestId(/last-location-pathname/i)
     // Check if we are on the homepage
-    screen.getAllByRole('heading', {
+    screen.getByRole('heading', {
       name: /home/i
     })
 
     // Visit /about
-    userEvent.click(screen.getAllByText(/AboutLink/i)[0])
+    userEvent.click(screen.getByText(/AboutLink/i))
      
     // Check if we are on the /about
     screen.getAllByRole('heading', {
@@ -61,19 +61,17 @@ describe('RedirectWithoutLastLocation', () => {
     })
 
     // Check lastLocation
-    let pathName = screen.getAllByTestId(/last-location-pathname/i)
-    expect(pathName[pathName.length -1]).toHaveTextContent('/')
+    expect(screen.getByTestId(/last-location-pathname/i)).toHaveTextContent('/')
 
     // Visit /secret
-    userEvent.click(screen.getAllByText(/SecretLink/i)[0])
+    userEvent.click(screen.getByText(/SecretLink/i))
     // We Should be redirected back to homepage
-    screen.getAllByRole('heading', {
+    screen.getByRole('heading', {
       name: /home/i
     })
 
     // The lastLocation should point to /about
-    pathName = screen.getAllByTestId(/last-location-pathname/i)
-    expect(pathName[pathName.length -1]).toHaveTextContent('/about')
+    expect(screen.getByTestId(/last-location-pathname/i)).toHaveTextContent('/about')
   };
 
   describe('When `to` is passed as a string', () => {
@@ -84,11 +82,14 @@ describe('RedirectWithoutLastLocation', () => {
     });
   });
   describe('When `to` is passed as an object', () => {
-    rtlRender({
-      redirectTo: {
-        pathname: '/',
-      },
+    it('should store redirected route', () => {
+      rtlRender({
+        redirectTo: {
+          pathname: '/',
+        },
+      })
+      runTest();
+    });
     })
-    runTest();
-  });
+    
 });
