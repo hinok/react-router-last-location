@@ -4,7 +4,8 @@ import { renderHook as rtlRenderHook, act } from '@testing-library/react-hooks';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import useLastLocation from './useLastLocation';
-import LastLocationProvider from './LastLocationProvider';
+import LastLocationProvider, { setLastLocation, getLastLocation } from './LastLocationProvider';
+import { LastLocationType } from './LastLocationContext';
 
 function renderHook(watchOnlyPathname = false) {
   const history = createMemoryHistory({
@@ -26,6 +27,7 @@ function renderHook(watchOnlyPathname = false) {
   };
 }
 
+afterEach(() => setLastLocation(null))
 describe('useLastLocation', () => {
   it('should have no last location on the first visit', async () => {
     const { result } = renderHook();
@@ -93,7 +95,7 @@ it('should do nothing if application is rerendered and location is the same', ()
     history.push('/test-1');
     history.push('/test-2');
   });
-
+  const getterLastPrev = getLastLocation() as Exclude<LastLocationType, null>
   const lastLocationPrev = (result.current as any).pathname;
   /**
      * This one is a bit tricky. I want to test case when `getDerivedStateFromProps` would be
@@ -101,8 +103,11 @@ it('should do nothing if application is rerendered and location is the same', ()
      * @see https://github.com/airbnb/enzyme/issues/1925#issuecomment-463248558
      */
   rerender();
+  const getterLastNext = getLastLocation() as Exclude<LastLocationType, null>
   const lastLocationNext = (result.current as any).pathname;
-
+  
+  expect(getterLastPrev.key).toBe(getterLastNext.key)
+  expect(getterLastPrev.pathname).toBe(getterLastNext.pathname)
   expect(lastLocationPrev).toBe(lastLocationNext);
 });
 
