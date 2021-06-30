@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { mount } from 'enzyme';
-import { History } from 'history';
-import { MemoryRouter } from 'react-router-dom';
+import {render, screen} from '@testing-library/react';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 import withLastLocation from './withLastLocation';
 import { getLastLocation } from './LastLocationProvider';
+import { WithLastLocationProps } from '.';
 
 const mockLocation = {
   pathname: '/testing-at-night',
@@ -20,18 +21,19 @@ jest.mock('./LastLocationProvider', () => ({
 const mockedGetLastLocation = getLastLocation as jest.Mock<ReturnType<typeof getLastLocation>>;
 
 const prepareTest = () => {
+  const history = createMemoryHistory({initialEntries: ["/"]})
   const TestComponent = () => <div>Test</div>;
   const TestComponentWithLastLocation = withLastLocation(TestComponent);
-  const wrapper = mount((
-    <MemoryRouter initialEntries={['/']}>
+  render(
+    <Router history={history}>
       <TestComponentWithLastLocation />
-    </MemoryRouter>
-  ));
+    </Router>
+  );
 
   return {
     TestComponent,
     TestComponentWithLastLocation,
-    wrapper,
+    history
   };
 };
 
@@ -46,20 +48,27 @@ describe('withLastLocation', () => {
     });
 
     it('should render the wrapped component', () => {
-      const { wrapper } = prepareTest();
-      expect(wrapper.html()).toBe('<div>Test</div>');
+      prepareTest();
+      expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
-    it('should pass lastLocation as a parameter to the wrapped component', () => {
-      const { TestComponent, wrapper } = prepareTest();
-      const lastLocationAsProp = wrapper.find(TestComponent).prop('lastLocation');
-      expect(lastLocationAsProp).toEqual(mockLocation);
-    });
+    it('should pass lastLocation as prop to the wrapped component', () => {
+      const TestComponent = ({lastLocation}: WithLastLocationProps) => <div>{lastLocation ? lastLocation.pathname : ""}</div>;
+      const TestComponentWithLastLocation = withLastLocation(TestComponent);
+
+      const history = createMemoryHistory({initialEntries: ["/"]})
+      render(
+        <Router history={history}>
+          <TestComponentWithLastLocation />
+        </Router>
+      );
+
+      expect(screen.getByText(mockLocation.pathname)).toBeInTheDocument();
+    })
 
     it('should call getLastLocation when route is changed', () => {
-      const { TestComponent, wrapper } = prepareTest();
+      const {  history } = prepareTest();
       expect(mockedGetLastLocation.mock.calls.length).toBe(1);
-      const history: History = wrapper.find(TestComponent).prop('history');
       history.push('/saturday-night');
       expect(mockedGetLastLocation.mock.calls.length).toBe(2);
     });
@@ -68,6 +77,11 @@ describe('withLastLocation', () => {
       const TestComponent = () => <div>Test</div>;
       const TestComponentWithLastLocation = withLastLocation(TestComponent);
       expect(TestComponentWithLastLocation.displayName).toBe('withRouter(WithLastLocation(TestComponent))');
+    });
+
+    it('should set wrapped component name to Component on anonymous components', () => {
+      const TestComponentWithLastLocation = withLastLocation(() => <div>Test</div>);
+      expect(TestComponentWithLastLocation.displayName).toBe('withRouter(WithLastLocation(Component))');
     });
   });
 });
